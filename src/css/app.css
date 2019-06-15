@@ -1,0 +1,6 @@
+/* Improve touch performance */
+.list .item-link.active-state, .list .list-button.active-state, .button.active-state,
+  label.item-checkbox.active-state, label.item-radio.active-state,
+  a.link.active-state:before {
+  transition: none;
+}
