@@ -61,3 +61,6 @@ typings/
 .next
 www/
 src/fonts
+
+platforms/
+plugins/
