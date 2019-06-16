@@ -1,12 +1,4 @@
 {
-  "cordova-plugin-stepper": {
-    "source": {
-      "type": "registry",
-      "id": "https://github.com/achubutkin/cordova-plugin-stepper.git"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-whitelist": {
     "source": {
       "type": "registry",
@@ -59,6 +51,14 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-file@6.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-stepper": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-stepper"
     },
     "is_top_level": true,
     "variables": {}

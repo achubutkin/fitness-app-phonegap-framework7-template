@@ -1,0 +1,1 @@
+{"plugins":["cordova-plugin-whitelist","cordova-plugin-statusbar","cordova-plugin-keyboard","cordova-plugin-splashscreen","cordova-plugin-wkwebview-engine","cordova-plugin-device","cordova-plugin-file","cordova-plugin-stepper"]}
