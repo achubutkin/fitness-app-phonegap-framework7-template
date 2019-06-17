@@ -63,6 +63,9 @@ var app = new Framework7({
         // Init cordova APIs (see cordova-app.js)
         cordovaApp.init(f7);
       }
+
+      let theme = localStorage.getItem('theme') || 'theme-white'
+      $$('body').addClass(theme)
     },
   },
   initOnDeviceReady: true

@@ -117,9 +117,6 @@
 
         page = self
 
-        let theme = localStorage.getItem('theme') || 'theme-white'
-        $$('body').addClass(theme)
-
         let offset = 0
         if (!window.stepper) {
           app.dialog.alert('Plugin not supported for this platform.')
