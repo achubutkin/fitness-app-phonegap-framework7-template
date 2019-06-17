@@ -4,6 +4,7 @@ import FormPage from '../pages/form.f7.html';
 import DynamicRoutePage from '../pages/dynamic-route.f7.html';
 import RequestAndLoad from '../pages/request-and-load.f7.html';
 import NotFoundPage from '../pages/not-found.f7.html';
+import SettingsPage from '../pages/settings.f7.html';
 
 import PanelLeftPage from '../pages/panel-left.f7.html';
 import PanelRightPage from '../pages/panel-right.f7.html';
@@ -24,6 +25,12 @@ export default [
   {
     path: '/about/',
     component: AboutPage,
+  },
+  {
+    path: '/settings/',
+    popup: {
+      component: SettingsPage
+    }
   },
   {
     path: '/form/',

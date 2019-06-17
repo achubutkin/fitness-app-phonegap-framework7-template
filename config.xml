@@ -18,14 +18,14 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="StatusBarOverlaysWebView" value="true" />
-        <preference name="StatusBarBackgroundColor" value="#2196f3" />
+        <preference name="StatusBarBackgroundColor" value="#f44336" />
         <preference name="StatusBarStyle" value="lightcontent" />
         <preference name="Fullscreen" value="false" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <preference name="StatusBarBackgroundColor" value="#f7f7f8" />
+        <preference name="StatusBarBackgroundColor" value="#1b1b1b" />
         <preference name="StatusBarStyle" value="default" />
     </platform>
     <allow-navigation href="*" />

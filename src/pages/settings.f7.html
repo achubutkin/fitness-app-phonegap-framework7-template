@@ -1,0 +1,68 @@
+<!-- Popup -->
+<template>
+  <div class="popup" id="settings">
+    <div class="view view-init">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="title">Settings</div>
+            <div class="right">
+              <a href="#" class="link popup-close">Close</a>
+            </div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="block-title steps">Choose Layout Theme</div>
+          <div class="list">
+            <ul>
+              <li>
+                <label class="item-radio item-content">
+                  <input type="radio" name="layout-radio" value="theme-white" checked=""><i class="icon-radio"></i>
+                  <div class="item-inner">
+                    <div class="item-title">Default</div>
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label class="item-radio item-content">
+                  <input type="radio" name="layout-radio" value="theme-dark"><i class="icon-radio"></i>
+                  <div class="item-inner">
+                    <div class="item-title">Dark</div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  import $$ from 'dom7';
+
+  let page
+
+  export default {
+    on: {
+      pageInit: function (e) {
+        const self = this
+        const app = self.$app
+
+        page = self
+
+        let theme = localStorage.getItem('theme') || 'theme-white'
+        $$('input[name="layout-radio"][value="' + theme + '"]').attr('checked', true)
+
+        $$('input[name="layout-radio"]').on('change', function () {
+          if (this.checked) {
+            $$('body').removeClass('theme-white theme-dark')
+            $$('body').addClass(this.value)
+            
+            localStorage.setItem('theme', this.value)
+          }
+        })
+      }
+    }
+  }
+</script>

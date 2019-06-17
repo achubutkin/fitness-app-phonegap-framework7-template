@@ -26,7 +26,6 @@ var app = new Framework7({
         firstName: 'John',
         lastName: 'Doe',
       },
-
     };
   },
   // App root methods
@@ -49,9 +48,9 @@ var app = new Framework7({
     enabled: Framework7.device.ios && Framework7.device.webView,
     iosOverlaysWebView: true,
     androidOverlaysWebView: true,
-    androidBackgroundColor: '#2196f3',
+    androidBackgroundColor: '#f44336',
     androidTextColor: '#ffffff',
-    iosBackgroundColor: '#f7f7f8',
+    iosBackgroundColor: '#1b1b1b',
     iosTextColor: 'black',
   },
   touch: {
