@@ -27,7 +27,7 @@
       <div class="block block-strong">
         <p>Here is your blank Framework7 app. Let's see what we have here.</p>
       </div>
-      <div class="block-title">Navigation</div>
+      <div class="block-title steps">Navigation</div>
       <div class="list">
         <ul>
           <li>
@@ -98,5 +98,35 @@
   </div>
 </template>
 <script>
-  export default {}
+  let page
+  const options = {}
+  let stepsEl
+
+  function updateUI(steps) {
+    if (!stepsEl) stepsEl = page.$el.find('.steps')
+    stepsEl.html(steps)
+  }
+
+  export default {
+    on: {
+      pageInit: function (e) {
+        const self = this
+        const app = self.$app
+
+        page = self
+
+        let offset = 0
+        if (!window.stepper) {
+          app.dialog.alert('Plugin not supported for this platform.')
+          return;
+        }
+
+        stepper.startStepperUpdates(offset, (result) => updateUI(result.steps_today),
+          (err) => {
+            app.dialog.alert(err)
+            console.error(err)
+          }, options)
+      }
+    }
+  }
 </script>

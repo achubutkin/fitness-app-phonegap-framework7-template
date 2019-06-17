@@ -6,6 +6,8 @@ import 'framework7/css/framework7.min.css';
 
 // Import Icons and App Custom Styles
 import '../css/icons.css';
+import '../fonts/roboto/stylesheet.css';
+import '../fonts/oswald/stylesheet.css';
 import '../css/app.css';
 // Import Cordova APIs
 import cordovaApp from './cordova-app.js';

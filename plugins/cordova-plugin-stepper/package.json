@@ -1,27 +1,24 @@
 {
-  "_from": "cordova-plugin-stepper",
+  "_from": "git+https://github.com/achubutkin/cordova-plugin-stepper.git",
   "_id": "cordova-plugin-stepper@0.1.2",
   "_inBundle": false,
-  "_integrity": "sha512-89yypwbnd93NWGKcbK4ys+GSOd9bEyqO9Di7diCdBfS2j3Sn9B/RI/6wFEFCTSwKKPgPiKS98+FYC6eeBDmD0Q==",
+  "_integrity": "",
   "_location": "/cordova-plugin-stepper",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "cordova-plugin-stepper",
-    "name": "cordova-plugin-stepper",
-    "escapedName": "cordova-plugin-stepper",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
+    "type": "git",
+    "raw": "https://github.com/achubutkin/cordova-plugin-stepper.git",
+    "rawSpec": "https://github.com/achubutkin/cordova-plugin-stepper.git",
+    "saveSpec": "git+https://github.com/achubutkin/cordova-plugin-stepper.git",
+    "fetchSpec": "https://github.com/achubutkin/cordova-plugin-stepper.git",
+    "gitCommittish": null
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-stepper/-/cordova-plugin-stepper-0.1.2.tgz",
-  "_shasum": "49fec63ab8c26d55aef980bac58c6aa03d4bc9e1",
-  "_spec": "cordova-plugin-stepper",
+  "_resolved": "git+https://github.com/achubutkin/cordova-plugin-stepper.git#9bce724c79d10bee96cf1e751b4c3ef2157702c3",
+  "_spec": "https://github.com/achubutkin/cordova-plugin-stepper.git",
   "_where": "D:\\virtualenvs\\Development\\fitness-app-phonegap-framework7-template",
   "author": {
     "name": "Alexandr Chubutkin"
