@@ -17,9 +17,17 @@
             <ul>
               <li>
                 <label class="item-radio item-content">
-                  <input type="radio" name="layout-radio" value="theme-white" checked=""><i class="icon-radio"></i>
+                  <input type="radio" name="layout-radio" value="auto" checked=""><i class="icon-radio"></i>
                   <div class="item-inner">
-                    <div class="item-title">Default</div>
+                    <div class="item-title">Auto</div>
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label class="item-radio item-content">
+                  <input type="radio" name="layout-radio" value="theme-white"><i class="icon-radio"></i>
+                  <div class="item-inner">
+                    <div class="item-title">Light</div>
                   </div>
                 </label>
               </li>
@@ -51,15 +59,20 @@
 
         page = self
 
-        let theme = localStorage.getItem('theme') || 'theme-white'
+        let theme = localStorage.getItem('theme') || 'auto'
         $$('input[name="layout-radio"][value="' + theme + '"]').attr('checked', true)
 
         $$('input[name="layout-radio"]').on('change', function () {
           if (this.checked) {
-            $$('body').removeClass('theme-white theme-dark')
-            $$('body').addClass(this.value)
-            
             localStorage.setItem('theme', this.value)
+            if (this.value === 'auto') {
+              app.methods.runAutocheckLayoutTheme()
+            }
+            else {
+              app.methods.stopAutocheckLayoutTheme()
+              $$('body').removeClass('theme-white theme-dark')
+              $$('body').addClass(this.value)
+            }
           }
         })
       }

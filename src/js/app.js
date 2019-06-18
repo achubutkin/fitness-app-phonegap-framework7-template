@@ -14,6 +14,29 @@ import cordovaApp from './cordova-app.js';
 // Import Routes
 import routes from './routes.js';
 
+function runAutocheckLayoutTheme() {
+  let intervalId = parseInt(localStorage.getItem('autocheckThemeIntervalId') || 0),
+    theme = localStorage.getItem('theme') || 'auto'
+  if (intervalId)
+    clearInterval(intervalId)
+  if (theme === 'auto') {
+    intervalId = setInterval(() => {
+      let hours = (new Date()).getHours(),
+        isDayTime = hours > 6 && hours < 20
+      theme = isDayTime ? 'theme-white' : 'theme-dark'
+      if ($$('body').hasClass(theme))
+        return
+      $$('body').removeClass('theme-white theme-dark')
+      $$('body').addClass(theme)
+    }, 1000)
+    
+    localStorage.setItem('autocheckThemeIntervalId', intervalId)
+  }
+  else {
+    $$('body').addClass(theme)
+  }
+}
+
 var app = new Framework7({
   root: '#app', // App root element
   id: 'io.phonegap.fitnessapptemplate', // App bundle ID
@@ -33,6 +56,11 @@ var app = new Framework7({
     helloWorld: function () {
       app.dialog.alert('Hello World!');
     },
+    runAutocheckLayoutTheme: runAutocheckLayoutTheme,
+    stopAutocheckLayoutTheme: function () {
+      let intervalId = parseInt(localStorage.getItem('autocheckThemeIntervalId') || 0)
+      clearInterval(intervalId)
+    }
   },
   // App routes
   routes: routes,
@@ -64,8 +92,7 @@ var app = new Framework7({
         cordovaApp.init(f7);
       }
 
-      let theme = localStorage.getItem('theme') || 'theme-white'
-      $$('body').addClass(theme)
+      runAutocheckLayoutTheme()
     },
   },
   initOnDeviceReady: true
