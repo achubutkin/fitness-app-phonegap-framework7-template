@@ -22,20 +22,23 @@ function startCheckLayoutTheme() {
     clearInterval(intervalId)
 
   if (theme === 'auto') {
-    intervalId = setInterval(() => {
-      let hours = (new Date()).getHours(),
-        isDayTime = hours > 6 && hours < 20
-      theme = isDayTime ? 'theme-white' : 'theme-dark'
-      if ($$('body').hasClass(theme))
-        return
-      $$('body').removeClass('theme-white theme-dark')
-      $$('body').addClass(theme)
-    }, 1000)
+    setLayoutThemeByTime()
+    intervalId = setInterval(() => setLayoutThemeByTime(), 1000)
     localStorage.setItem('autocheckThemeIntervalId', intervalId)
   }
   else {
     $$('body').addClass(theme)
   }
+}
+
+function setLayoutThemeByTime() {
+  let hours = (new Date()).getHours(),
+    isDayTime = hours > 6 && hours < 20,
+    theme = isDayTime ? 'theme-white' : 'theme-dark'
+  if ($$('body').hasClass(theme))
+    return
+  $$('body').removeClass('theme-white theme-dark')
+  $$('body').addClass(theme)
 }
 
 var app = new Framework7({

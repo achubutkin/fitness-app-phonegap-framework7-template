@@ -12,7 +12,25 @@
           </div>
         </div>
         <div class="page-content">
-          <div class="block-title steps">Choose Layout Theme</div>
+          <div class="block-title">Personal</div>
+          <div class="list">
+            <ul>
+              <li>
+                <a class="item-link smart-select smart-select-init" data-open-in="popover">
+                  <select name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">Gender</div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="block-title">Choose Layout Theme</div>
           <div class="list">
             <ul>
               <li>
@@ -59,17 +77,26 @@
 
         page = self
 
-        let theme = localStorage.getItem('theme') || 'auto'
-        $$('input[name="layout-radio"][value="' + theme + '"]').attr('checked', true)
+        const genderSmartSelEl = self.$el.find('[name="gender"]')
+        let gender = localStorage.getItem('gender') || 'male'
+        genderSmartSelEl.val(gender)
+        genderSmartSelEl.on('change', (e) => {
+          localStorage.setItem('gender', genderSmartSelEl.val())
+        })
 
-        $$('input[name="layout-radio"]').on('change', function () {
+        const themelayoutEl = self.$el.find('input[name="layout-radio"]')
+        let theme = localStorage.getItem('theme') || 'auto'
+        self.$el.find('input[name="layout-radio"][value="' + theme + '"]').attr('checked', true)
+        themelayoutEl.on('change', function () {
           if (this.checked) {
             localStorage.setItem('theme', this.value)
             if (this.value === 'auto') {
               app.methods.startCheckLayoutTheme()
             }
             else {
-              app.methods.stopCheckLayoutTheme()
+              if (this.value !== 'auto') {
+                app.methods.stopCheckLayoutTheme()
+              }
               $$('body').removeClass('theme-white theme-dark')
               $$('body').addClass(this.value)
             }
