@@ -4,3 +4,7 @@
   a.link.active-state:before {
   transition: none;
 }
+
+.md .theme-dark .list .item-footer {
+  color: rgba(255,255,255,.5);
+}
