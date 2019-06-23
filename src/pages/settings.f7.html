@@ -66,10 +66,10 @@
           if (this.checked) {
             localStorage.setItem('theme', this.value)
             if (this.value === 'auto') {
-              app.methods.runAutocheckLayoutTheme()
+              app.methods.startCheckLayoutTheme()
             }
             else {
-              app.methods.stopAutocheckLayoutTheme()
+              app.methods.stopCheckLayoutTheme()
               $$('body').removeClass('theme-white theme-dark')
               $$('body').addClass(this.value)
             }

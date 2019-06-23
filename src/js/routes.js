@@ -9,10 +9,25 @@ import SettingsPage from '../pages/settings.f7.html';
 import PanelLeftPage from '../pages/panel-left.f7.html';
 import PanelRightPage from '../pages/panel-right.f7.html';
 
+import TabPage1 from '../pages/tab1.f7.html';
+import TabPage2 from '../pages/tab2.f7.html';
+
 export default [
   {
-    path: '/',
+    path: '/tabs-routable/',
     component: HomePage,
+    tabs: [
+      {
+        path: '/',
+        id: 'tab1',
+        component: TabPage1
+      },
+      {
+        path: '/tab2/',
+        id: 'tab2',
+        component: TabPage2
+      },      
+    ]
   },
   {
     path: '/panel-left/',

@@ -17,117 +17,28 @@
         </div>
       </div>
     </div>
-    <div class="toolbar">
+    <div class="toolbar tabbar">
       <div class="toolbar-inner">
-        <a href="#" class="link">Left Link</a>
-        <a href="#" class="link">Right Link</a>
+        <a href="./" class="tab-link" data-route-tab-id="tab1">Tab 1</a>
+        <a href="tab2/" class="tab-link" data-route-tab-id="tab2">Tab 2</a>
       </div>
     </div>
-    <div class="page-content">
-      <div class="block block-strong">
-        <p>Here is your blank Framework7 app. Let's see what we have here.</p>
-      </div>
-      <div class="block-title steps">Navigation</div>
-      <div class="list">
-        <ul>
-          <li>
-            <a href="/about/" class="item-content item-link">
-              <div class="item-inner">
-                <div class="item-title">About</div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="/form/" class="item-content item-link">
-              <div class="item-inner">
-                <div class="item-title">Form</div>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="block-title">Modals</div>
-      <div class="block block-strong">
-        <div class="row">
-          <div class="col-50">
-            <a href="/settings/" class="button button-fill button-raised">Settings</a>
-          </div>
-          <div class="col-50">
-            <a href="#" class="button button-fill button-raised login-screen-open"
-              data-login-screen="#login-screen">Login Screen</a>
-          </div>
-        </div>
-      </div>
-      <div class="block-title">Panels</div>
-      <div class="block block-strong">
-        <div class="row">
-          <div class="col-50">
-            <a href="#" class="button button-fill button-raised panel-open" data-panel="left">Left Panel</a>
-          </div>
-          <div class="col-50">
-            <a href="#" class="button button-fill button-raised panel-open" data-panel="right">Right Panel</a>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <ul>
-          <li>
-            <a href="/dynamic-route/blog/45/post/125/?foo=bar#about" class="item-link item-content">
-              <div class="item-inner">
-                <div class="item-title">Dynamic Route</div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="/request-and-load/user/:userId/" class="item-link item-content">
-              <div class="item-inner">
-                <div class="item-title">Request and load</div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="/load-something-that-doesnt-exist/" class="item-link item-content">
-              <div class="item-inner">
-                <div class="item-title">Default Route (404)</div>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
+    <div class="tabs tabs-routable">
+      <div class="page-content tab" id="tab1"></div>
+      <div class="page-content tab" id="tab2"></div>
     </div>
   </div>
 </template>
 <script>
-  import $$ from 'dom7';
-  
-  let page
-  const options = {}
-  let stepsEl
-
-  function updateUI(steps) {
-    if (!stepsEl) stepsEl = page.$el.find('.steps')
-    stepsEl.html(steps)
-  }
-
   export default {
     on: {
-      pageInit: function (e) {
+      pageInit: function (e, page) {
         const self = this
         const app = self.$app
 
-        page = self
-
-        let offset = 0
         if (!window.stepper) {
           app.dialog.alert('Plugin not supported for this platform.')
-          return;
         }
-
-        stepper.startStepperUpdates(offset, (result) => updateUI(result.steps_today),
-          (err) => {
-            app.dialog.alert(err)
-            console.error(err)
-          }, options)
       }
     }
   }

@@ -14,11 +14,13 @@ import cordovaApp from './cordova-app.js';
 // Import Routes
 import routes from './routes.js';
 
-function runAutocheckLayoutTheme() {
+function startCheckLayoutTheme() {
   let intervalId = parseInt(localStorage.getItem('autocheckThemeIntervalId') || 0),
     theme = localStorage.getItem('theme') || 'auto'
+
   if (intervalId)
     clearInterval(intervalId)
+
   if (theme === 'auto') {
     intervalId = setInterval(() => {
       let hours = (new Date()).getHours(),
@@ -29,7 +31,6 @@ function runAutocheckLayoutTheme() {
       $$('body').removeClass('theme-white theme-dark')
       $$('body').addClass(theme)
     }, 1000)
-    
     localStorage.setItem('autocheckThemeIntervalId', intervalId)
   }
   else {
@@ -56,8 +57,8 @@ var app = new Framework7({
     helloWorld: function () {
       app.dialog.alert('Hello World!');
     },
-    runAutocheckLayoutTheme: runAutocheckLayoutTheme,
-    stopAutocheckLayoutTheme: function () {
+    startCheckLayoutTheme: startCheckLayoutTheme,
+    stopCheckLayoutTheme: function () {
       let intervalId = parseInt(localStorage.getItem('autocheckThemeIntervalId') || 0)
       clearInterval(intervalId)
     }
@@ -92,10 +93,13 @@ var app = new Framework7({
         cordovaApp.init(f7);
       }
 
-      runAutocheckLayoutTheme()
+      startCheckLayoutTheme()
     },
   },
-  initOnDeviceReady: true
+  initOnDeviceReady: true,
+  view: {
+    unloadTabContent: false
+  }
 });
 
 // Login Screen Demo

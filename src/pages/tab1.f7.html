@@ -1,0 +1,145 @@
+<template>
+  <div>
+    <div class="block-title">
+      Settings
+    </div>
+    <div class="block">
+      <p>
+        <a class="button button-big button-fill" href="/settings/">Settings</a>
+      </p>
+    </div>
+    <div class="block run-container">
+      <button type="button" class="button button-big button-fill run" data-run-text="Run"
+        data-stop-text="Stop">Run</button>
+    </div>
+  </div>
+</template>
+<script>
+  import $$ from 'dom7';
+
+  const options = {}
+
+  export default {
+    on: {
+      tabInit: function (e, tab) {
+        const self = this
+        const app = self.$app
+        const runEl = self.$el.find('.run')
+        const stepsEl = self.$el.find('.steps')
+
+        let isrun = localStorage.getItem('isrun') === 'true'
+        let offset = 0
+
+        if (isrun) {
+          runEl
+            .addClass('active')
+            .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+          if (window.stepper) {
+            stepper.startStepperUpdates(offset, (result) => { }, (err) => {
+              isrun = false
+              localStorage.setItem('isrun', isrun)
+              runEl
+                .removeClass('active')
+                .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+              app.dialog.alert(err)
+              console.error(err)
+            }, options)
+          }
+        }
+        else {
+          if (window.stepper) {
+            stepper.stopStepperUpdates(() => { }, (err) => {
+              app.dialog.alert(err)
+              console.error(err)
+            })
+          }
+        }
+
+        runEl.on('click', (e) => {
+          isrun = !isrun
+          localStorage.setItem('isrun', isrun)
+ 
+          runEl
+            .toggleClass('active')
+            .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+          if (window.stepper) {
+            if (isrun) {
+              stepper.startStepperUpdates(offset, (result) => { }, (err) => {
+                isrun = false
+                localStorage.setItem('isrun', isrun)
+                runEl
+                  .removeClass('active')
+                  .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+                app.dialog.alert(err)
+                console.error(err)
+              }, options)
+            }
+            else {
+              stepper.stopStepperUpdates(() => { }, (err) => {
+                app.dialog.alert(err)
+                console.error(err)
+              })
+            }
+          }
+        })
+      }
+    }
+  }
+</script>
+<style>
+  .block.run-container {
+    padding: 0 38px;
+  }
+
+  .button.button-big.run {
+    border-radius: 100px;
+    color: #fff;
+    z-index: 2;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
+    text-transform: none;
+    font-weight: 600;
+    overflow: visible;
+  }
+
+  .button.button-big.run:focus,
+  .button.button-big.run:active,
+  .button.button-big.run.active-state {
+    transition: none !important;
+  }
+
+  .run.active:before {
+    -webkit-animation: pulse 2s ease infinite;
+    animation: pulse 2s ease infinite;
+    border-radius: 100px;
+    background: #f44336;
+    position: absolute;
+    content: "";
+    z-index: -1;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1)
+    }
+
+    50% {
+      opacity: 0.2
+    }
+
+    100% {
+      transform: scale(1.2, 1.5);
+      opacity: 0
+    }
+  }
+</style>
