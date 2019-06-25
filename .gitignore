@@ -58,6 +58,8 @@ typings/
 .env
 
 # next.js build output
+# https://github.com/naikus/svg-gauge
+# https://www.html5canvastutorials.com/tutorials/html5-canvas-bursting-particle-effect/ 
 .next
 www/
 src/fonts

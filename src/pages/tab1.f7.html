@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div class="block-title">
-      Settings
-    </div>
-    <div class="block">
-      <p>
-        <a class="button button-big button-fill" href="/settings/">Settings</a>
-      </p>
+    <div class="block text-align-center">
+      <div class="gauge"></div>
     </div>
     <div class="block container">
       <button type="button" class="button button-big button-fill run" data-run-text="Run"
@@ -16,6 +11,7 @@
 </template>
 <script>
   import $$ from 'dom7';
+  import customize from '../js/gaugeCustomizer';
 
   const options = {}
 
@@ -27,47 +23,51 @@
         const runEl = self.$el.find('.run')
         const stepsEl = self.$el.find('.steps')
 
+        let goal = 100;
         let isrun = localStorage.getItem('isrun') === 'true'
         let offset = 0
 
-        if (isrun) {
-          runEl
-            .addClass('active')
-            .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+        const gauge = app.gauge.create({
+          el: '.gauge',
+          type: 'semicircle',
+          value: 0,
+          size: 250,
+          borderColor: '#2196f3',
+          borderWidth: 8,
+          valueText: '0',
+          valueFontSize: 68,
+          valueFontWeight: 600,
+          valueTextColor: isrun ? '#2196f3' : '#eeeeee',
+          labelText: 'amount of something',
+          labelTextColor: '#eeeeee',
+          /* labelFontSize: 12, */
+          borderBgColor: '#eeeeee'
+        })
 
-          if (window.stepper) {
-            stepper.startStepperUpdates(offset, (result) => { }, (err) => {
-              isrun = false
-              localStorage.setItem('isrun', isrun)
-              runEl
-                .removeClass('active')
-                .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+        function updateGauge(result) {
+          let steps_today = result.steps_today
+          let value = steps_today <= goal ? steps_today / goal : (steps_today - (goal * (steps_today / goal))) / goal
+          gauge.update({
+            valueTextColor: isrun ? '#2196f3' : '#eeeeee',
+            value: value,
+            valueText: steps_today.toString(),
+          })
+          customize(gauge)
+        }
 
-              app.dialog.alert(err)
-              console.error(err)
-            }, options)
-          }
-        }
-        else {
-          if (window.stepper) {
-            stepper.stopStepperUpdates(() => { }, (err) => {
-              app.dialog.alert(err)
-              console.error(err)
-            })
-          }
-        }
+        updateGauge({ steps_today: 0 })
 
         runEl.on('click', (e) => {
           isrun = !isrun
           localStorage.setItem('isrun', isrun)
- 
+
           runEl
             .toggleClass('active')
             .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
 
           if (window.stepper) {
             if (isrun) {
-              stepper.startStepperUpdates(offset, (result) => { }, (err) => {
+              stepper.startStepperUpdates(offset, updateGauge, (err) => {
                 isrun = false
                 localStorage.setItem('isrun', isrun)
                 runEl
@@ -79,13 +79,48 @@
               }, options)
             }
             else {
-              stepper.stopStepperUpdates(() => { }, (err) => {
+              let fakeresult = { steps_today: 0 }
+              stepper.stopStepperUpdates(() => updateGauge(fakeresult), (err) => {
                 app.dialog.alert(err)
                 console.error(err)
               })
             }
           }
         })
+
+        if (isrun) {
+          runEl
+            .addClass('active')
+            .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+          if (window.stepper) {
+            stepper.setGoal(goal, () => {
+              stepper.startStepperUpdates(offset, updateGauge, (err) => {
+                isrun = false
+                localStorage.setItem('isrun', isrun)
+                runEl
+                  .removeClass('active')
+                  .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+                app.dialog.alert(err)
+                console.error(err)
+              }, options)
+            }, (err) => {
+              app.dialog.alert(err)
+              console.error(err)
+            })
+          }
+        }
+        else {
+          if (window.stepper) {
+            stepper.stopStepperUpdates(() => {
+
+            }, (err) => {
+              app.dialog.alert(err)
+              console.error(err)
+            })
+          }
+        }
       }
     }
   }
@@ -141,5 +176,14 @@
       transform: scale(1.2, 1.5);
       opacity: 0
     }
+  }
+
+  .gauge-front-semi, .gauge-back-semi {
+    stroke-linecap: round;
+  }
+
+  .gauge-value-text {
+    font-family: 'Oswald', Roboto, Noto, Helvetica, Arial, sans-serif;
+    letter-spacing: 0.08rem;
   }
 </style>
