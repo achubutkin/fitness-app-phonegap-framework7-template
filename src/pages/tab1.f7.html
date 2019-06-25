@@ -3,6 +3,9 @@
     <div class="block text-align-center">
       <div class="gauge"></div>
     </div>
+    <div class="cup-container">
+      <i class="cup-icon"></i>
+    </div>
     <div class="block container">
       <button type="button" class="button button-big button-fill run" data-run-text="Run"
         data-stop-text="Stop">Run</button>
@@ -60,6 +63,7 @@
             .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
 
           gauge.$el.toggleClass('enable')
+          self.$el.find('.cup-container').toggleClass('enable')
 
           if (window.stepper) {
             if (isrun) {
@@ -71,6 +75,7 @@
                   .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
 
                 gauge.$el.removeClass('enable')
+                self.$el.find('.cup-container').removeClass('enable')
 
                 app.dialog.alert(err)
                 console.error(err)
@@ -94,6 +99,7 @@
             .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
 
           gauge.$el.addClass('enable')
+          self.$el.find('.cup-container').addClass('enable')
 
           if (window.stepper) {
             stepper.setGoal(goal, () => {
@@ -105,6 +111,7 @@
                   .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
 
                 gauge.$el.removeClass('enable')
+                self.$el.find('.cup-container').removeClass('enable')
 
                 app.dialog.alert(err)
                 console.error(err)
@@ -230,5 +237,28 @@
 
   .theme-dark .gauge .gauge-front-semi {
     stroke: #eeeeee;
+  }
+
+  .cup-container {
+    margin: 32px auto;
+    max-width: 250px;
+    position: relative;
+    display: block;
+  }
+
+  .cup-container .cup-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -40px;
+    right: -12px;
+    background-image: url('/static/trophy.png');
+    background-size: 48px 24px;
+    background-repeat: no-repeat;
+    background-position-x: -24px;
+  }
+
+  .cup-container.enable .cup-icon {
+    background-position-x: 0;
   }
 </style>
