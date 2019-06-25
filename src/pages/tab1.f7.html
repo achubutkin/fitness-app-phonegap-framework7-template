@@ -26,7 +26,7 @@
         const runEl = self.$el.find('.run')
         const stepsEl = self.$el.find('.steps')
 
-        let goal = 100;
+        let goal = 1000;
         let isrun = localStorage.getItem('isrun') === 'true'
         let offset = 0
 
@@ -39,7 +39,7 @@
           valueText: '0',
           valueFontSize: 58,
           valueFontWeight: 600,
-          labelText: 'amount of something',
+          labelText: `of ${goal} steps`,
         })
 
         function updateGauge(result) {
