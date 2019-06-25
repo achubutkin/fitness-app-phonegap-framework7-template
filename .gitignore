@@ -60,6 +60,11 @@ typings/
 # next.js build output
 # https://github.com/naikus/svg-gauge
 # https://www.html5canvastutorials.com/tutorials/html5-canvas-bursting-particle-effect/ 
+# https://codesandbox.io/s/0q28kv3r30
+# https://codepen.io/naikus/pen/BzkoLL
+# https://github.com/naikus/svg-gauge
+# https://stackoverflow.com/questions/50984050/gauge-meter-in-svg-with-round-corner#
+
 .next
 www/
 src/fonts

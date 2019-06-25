@@ -38,9 +38,9 @@ export default function (gauge) {
   }
   const size = params.size
   const labelFontSize = params.labelFontSize
-  $gaugeSvgEl.attr('height', `${size / 2 + 100}px`)
+  $gaugeSvgEl.attr('height', `${size / 2 + 60}px`)
   $gaugeSvgEl.find('.gauge-value-text').attr('dy', `${labelFontSize - 15}`)
-  $gaugeSvgEl.find('.gauge-label-text').attr('dy', 20)
+  $gaugeSvgEl.find('.gauge-label-text').attr('dy', 25)
 
   /*
 

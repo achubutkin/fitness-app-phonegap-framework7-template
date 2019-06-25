@@ -32,23 +32,17 @@
           type: 'semicircle',
           value: 0,
           size: 250,
-          borderColor: '#2196f3',
           borderWidth: 8,
           valueText: '0',
-          valueFontSize: 68,
+          valueFontSize: 58,
           valueFontWeight: 600,
-          valueTextColor: isrun ? '#2196f3' : '#eeeeee',
           labelText: 'amount of something',
-          labelTextColor: '#eeeeee',
-          /* labelFontSize: 12, */
-          borderBgColor: '#eeeeee'
         })
 
         function updateGauge(result) {
           let steps_today = result.steps_today
           let value = steps_today <= goal ? steps_today / goal : (steps_today - (goal * (steps_today / goal))) / goal
           gauge.update({
-            valueTextColor: isrun ? '#2196f3' : '#eeeeee',
             value: value,
             valueText: steps_today.toString(),
           })
@@ -65,6 +59,8 @@
             .toggleClass('active')
             .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
 
+          gauge.$el.toggleClass('enable')
+
           if (window.stepper) {
             if (isrun) {
               stepper.startStepperUpdates(offset, updateGauge, (err) => {
@@ -73,6 +69,8 @@
                 runEl
                   .removeClass('active')
                   .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+                gauge.$el.removeClass('enable')
 
                 app.dialog.alert(err)
                 console.error(err)
@@ -86,12 +84,16 @@
               })
             }
           }
+
+          updateGauge({ steps_today: 0 })
         })
 
         if (isrun) {
           runEl
             .addClass('active')
             .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+          gauge.$el.addClass('enable')
 
           if (window.stepper) {
             stepper.setGoal(goal, () => {
@@ -101,6 +103,8 @@
                 runEl
                   .removeClass('active')
                   .html(isrun ? runEl.data('stop-text') : runEl.data('run-text'))
+
+                gauge.$el.removeClass('enable')
 
                 app.dialog.alert(err)
                 console.error(err)
@@ -178,12 +182,53 @@
     }
   }
 
-  .gauge-front-semi, .gauge-back-semi {
+  .gauge-front-semi,
+  .gauge-back-semi {
     stroke-linecap: round;
   }
 
   .gauge-value-text {
     font-family: 'Oswald', Roboto, Noto, Helvetica, Arial, sans-serif;
     letter-spacing: 0.08rem;
+  }
+
+  .gauge .gauge-label-text {
+    font-weight: 300;
+  }
+
+  .gauge .gauge-value-text,
+  .gauge .gauge-label-text {
+    fill: #dedede;
+  }
+
+  .gauge .gauge-back-semi {
+    stroke: #dedede;
+  }
+
+  .gauge.enable .gauge-value-text,
+  .gauge.enable .gauge-label-text {
+    fill: #343434;
+  }
+
+  .gauge .gauge-front-semi {
+    stroke: #343434;
+  }
+
+  .theme-dark .gauge .gauge-value-text,
+  .theme-dark .gauge .gauge-label-text {
+    fill: #666666;
+  }
+
+  .theme-dark .gauge .gauge-back-semi {
+    stroke: #666666;
+  }
+
+  .theme-dark .gauge.enable .gauge-value-text,
+  .theme-dark .gauge.enable .gauge-label-text {
+    fill: #eeeeee;
+  }
+
+  .theme-dark .gauge .gauge-front-semi {
+    stroke: #eeeeee;
   }
 </style>

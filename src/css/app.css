@@ -8,3 +8,7 @@
 .md .theme-dark .list .item-footer {
   color: rgba(255,255,255,.5);
 }
+
+.md .navbar:after, .md .toolbar:after {
+  content: none;
+}
