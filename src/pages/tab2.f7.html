@@ -1,10 +1,48 @@
 <template>
-    <div>
-      <div class="block-title">
-        Tab 2
-      </div>
+  <div>
+    <div class="block-title">
+      Report
     </div>
-  </template>
-  <script>
-    export default {}
-  </script>
+    <div class="block">
+      <div class="ct-chart"></div>
+    </div>
+  </div>
+</template>
+<script>
+
+  const Chartist = require('../js/libs/chartist.min.js')
+
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    series: [
+      [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+      [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+    ]
+  }
+
+  const options = {
+    seriesBarDistance: 10
+  }
+
+  const responsiveOptions = [
+    ['screen and (max-width: 640px)', {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function (value) {
+          return value[0]
+        }
+      }
+    }]
+  ]
+
+  export default {
+    on: {
+      tabInit: function (e, tab) {
+        const self = this
+        const app = self.$app
+
+        const bar = new Chartist.Bar('.ct-chart', data, options, responsiveOptions)
+      }
+    }
+  }
+</script>
