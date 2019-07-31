@@ -28,6 +28,7 @@
   "license": "MIT",
   "homepage": "https://github.com/achubutkin/fitness-app-phonegap-framework7-template.git",
   "dependencies": {
+    "@amcharts/amcharts4": "^4.5.3",
     "cordova-android": "7.1.4",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-device": "^2.0.2",

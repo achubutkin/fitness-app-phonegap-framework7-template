@@ -91,6 +91,10 @@
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="orientation" value="portrait" />
     <preference name="ScrollEnabled" value="false" />
+    <preference name="phonegap-version" value="cli-8.0.0" />
+    <preference name="android-build-tool" value="gradle" />
+    <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-keyboard" spec="^1.2.0" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
@@ -99,8 +103,4 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-stepper" spec="^0.1.3" />
-    <preference name="phonegap-version" value="cli-8.0.0" />
-    <preference name="android-build-tool" value="gradle" />
-    <engine name="ios" spec="^4.5.5" />
-    <engine name="android" spec="7.1.4" />
 </widget>

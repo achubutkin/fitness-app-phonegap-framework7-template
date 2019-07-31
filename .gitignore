@@ -64,6 +64,7 @@ typings/
 # https://codepen.io/naikus/pen/BzkoLL
 # https://github.com/naikus/svg-gauge
 # https://stackoverflow.com/questions/50984050/gauge-meter-in-svg-with-round-corner#
+# https://www.amcharts.com/demos/step-count-chart/?theme=kelly
 
 .next
 www/
