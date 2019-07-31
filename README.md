@@ -1,2 +1,2 @@
 # fitness-app-phonegap-framework7-template
-Fitness/Pedometer starter app template based on Phonegap/Cordova and Framework7.
+Fitness/Pedometer starter app template based on Phonegap/Cordova and Framework7. The example application to demonstrate plugin https://github.com/achubutkin/cordova-plugin-stepper.
